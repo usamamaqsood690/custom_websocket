@@ -45,7 +45,7 @@ class WebSocketManager : WebSocketListener() {
 
     override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
         super.onClosing(webSocket, code, reason)
-        webSocket.close(1000, null);
+        closeWebSocket();
         println("socket closed")
     }
 
@@ -56,5 +56,11 @@ class WebSocketManager : WebSocketListener() {
         }
     }
 
+    fun closeWebSocket(){
+        if(webSocket == null){
+            println("Socket is Null");
+        }
+        webSocket?.close(1000, null);
+    }
     // Add other WebSocketListener methods as needed
 }
