@@ -1,5 +1,6 @@
 package com.example.sockets
 
+import android.content.Intent
 import io.flutter.plugin.common.MethodChannel
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -11,17 +12,17 @@ import java.net.URL
 import io.flutter.embedding.engine.FlutterEngine
 
 class WebSocketManager : WebSocketListener() {
-    private var webSocket: WebSocket? = null
+    public var webSocket: WebSocket? = null
 
     private val CHANNEL = "com.example.sockets/websocket"
 
 
     public var URL : String = "";
 
-    fun startWebSocket() {
+    fun startWebSocket(webSocketListener: WebSocketListener) {
         val client = OkHttpClient()
         val request = Request.Builder().url(URL).build()
-        webSocket = client.newWebSocket(request, this)
+        webSocket = client.newWebSocket(request, webSocketListener)
     }
 
     fun sendMessage(message: String) {

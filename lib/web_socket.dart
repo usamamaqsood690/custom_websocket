@@ -7,13 +7,14 @@ class MyWebSocketPlugin {
    static const platformEvent = EventChannel('com.example.sockets/websocket_listen');
 
 
-   static onListenStream(){
+    onListenStream(){
     return platformEvent.receiveBroadcastStream().listen((event) {
-print("HAHAHAHAH   ${event.toString()}");
-     });
+print("Data: ${event.toString()}");
+     },
+    );
    }
 
-  static Future<void> startWebSocket(String url) async {
+   Future<void> startWebSocket(String url) async {
     var args = {
       "url": url
     };
@@ -21,15 +22,14 @@ print("HAHAHAHAH   ${event.toString()}");
     print(connectionResult);
   }
 
-  
- static Future<void> sendMessage(String message) async {
+  Future<void> sendMessage(String message) async {
    var args = {
       "message": message
       };
     platform.invokeMethod("message", {'args': args}).then((value) => print(value));
   }
 
-   static Future<void> disconnectWebSocket() async {
+  Future<void> disconnectWebSocket() async {
      platform.invokeMethod("disconnect",).then((value) => print(value));
    }
 
