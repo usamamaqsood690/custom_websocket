@@ -17,7 +17,7 @@ class MainActivity: FlutterActivity() {
     private val CHANNEL = "com.example.sockets/websocket"
     private val CHANNEL_LISTEN_EVENTS = "com.example.sockets/websocket_listen"
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
+        super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
             .setMethodCallHandler { call: MethodCall, result: MethodChannel.Result ->
                 if (call.method == "connect") {
